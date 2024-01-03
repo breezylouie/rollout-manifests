@@ -1,19 +1,19 @@
 node {
     def app
     
-    env.IMAGE = 'laly9999/bluegreen-rollout'
+    env.IMAGE = 'brianmba/bluegreen-rollout-oct'
 
     stage('Clone repository') {
-             git branch: 'main', url: 'https://github.com/lily4499/rollout-manifests.git'  
+             git branch: 'main', url: 'https://github.com/breezylouie/rollout-manifests.git'  
     }
 
     stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([usernamePassword(credentialsId: 'karo-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'brianmba-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         //script {def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')}
-                        sh "git config user.email ooghenekaro@yahoo.com"
-                        sh "git config user.name ooghenekaro"
+                        sh "git config user.email briansamwed@gmail.com"
+                        sh "git config user.name breezylouie"
                         //sh "git switch master"
                         sh "cat rollout.yml"
                         sh "sed -i 's+${IMAGE}.*+${IMAGE}:${DOCKERTAG}+g' rollout.yml"
